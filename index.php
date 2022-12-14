@@ -1,5 +1,5 @@
 <?php
-
+ 
     $hotels = [
 
         [
@@ -39,6 +39,15 @@
         ],
 
     ];
+
+    $park = empty($_GET['parking']) ? null : $_GET['parking'];
+    $vote = empty($_GET['vote']) ? null : $_GET['vote'];
+    $research = false;
+    $ParkSloat = ($park == 'si') ? 'true' : 'false';
+
+
+
+   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,10 +60,22 @@
     <title>Hotel</title>
 </head>
 <body>
+
+<!-- form get -->
+
+<form action="index.php" method="GET">
+    <label for="parking">Parcheggio: </label>
+    <input name="parking" type="text" placeholder="Inserisci SI o NO">
+    <label for="vote">Voto: </label>
+    <input name="vote" type="text">
+    <button type="submit">Richiedi  </button>
+</form>
+
+
+
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#N</th>
       <th scope="col">Name</th>
       <th scope="col">Description</th>
       <th scope="col">Parking</th>
@@ -63,17 +84,33 @@
     </tr>
   </thead>
   <tbody>
-    <?php  foreach ( $hotels as $key => $hotel ) { ?>
-        <tr>
-            <th scope="row"><?php echo $key ?></th>
-                <td><?php echo $hotel['name']?></td>
-                <td><?php echo $hotel['description']?></td>
-                <td><?php echo $hotel['parking']?></td>
-                <td><?php echo $hotel['vote']?></td>
-                <td><?php echo $hotel['distance_to_center']?></td>
-        </tr>
-    <?php  } ?>
+    <?php  foreach ( $hotels as $key => $hotel ) { ?>  
+           <?php if($research == false ){   ?>
+            <tr>
+                 <th scope="row"><?php echo $hotel['name']?></th>
+                    <td><?php echo $hotel['description']?></td>
+                    <td><?php echo $hotel['parking']?></td>
+                    <td><?php echo $hotel['vote']?></td>
+                    <td><?php echo $hotel['distance_to_center']?></td>
+           </tr>
+            <?php }; ?>
+
+            <?php if(!empty($park || $vote)) {
+            $research = true;} ?>
+
+            <?php if ($research === true) { 
+                if ($hotel['vote'] >= $vote && $hotel['parking'] == $ParkSloat ){   ?>
+                <tr>
+                    <th scope="row"><?php echo $hotel['name']?></th>
+                        <td><?php echo $hotel['description']?></td>
+                        <td><?php echo $hotel['parking']?></td>
+                        <td><?php echo $hotel['vote']?></td>
+                        <td><?php echo $hotel['distance_to_center']?></td>
+                </tr>
+            <?php }; }; ?>    
+    <?php  }; ?>
   </tbody>
 </table>
 </body>
 </html>
+
