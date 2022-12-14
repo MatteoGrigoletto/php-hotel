@@ -96,7 +96,10 @@
             <?php }; ?>
 
             <?php if(!empty($park || $vote)) {
-            $research = true;} ?>
+            $research = true;
+                }else{
+                $research = false;}
+             ?>
 
             <?php if ($research === true) { 
                 if ($hotel['vote'] >= $vote && $hotel['parking'] == $ParkSloat ){   ?>
