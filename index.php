@@ -62,58 +62,60 @@
 <body>
 
 <!-- form get -->
+<div class="container-xxl d-flex justify-content-center py-5">
+    <form action="index.php" method="GET" >
+        <label for="parking">Parcheggio: </label>
+        <input name="parking" type="text" placeholder="Inserisci SI o NO">
+        <label for="vote">Voto: </label>
+        <input name="vote" type="text">
+        <button type="submit">Richiedi  </button>
+    </form>
+</div>
 
-<form action="index.php" method="GET">
-    <label for="parking">Parcheggio: </label>
-    <input name="parking" type="text" placeholder="Inserisci SI o NO">
-    <label for="vote">Voto: </label>
-    <input name="vote" type="text">
-    <button type="submit">Richiedi  </button>
-</form>
 
-
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Parking</th>
-      <th scope="col">Vote</th>
-      <th scope="col">Distance to center</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php  foreach ( $hotels as $key => $hotel ) { ?>  
-           <?php if($research == false ){   ?>
-            <tr>
-                 <th scope="row"><?php echo $hotel['name']?></th>
-                    <td><?php echo $hotel['description']?></td>
-                    <td><?php echo $hotel['parking']?></td>
-                    <td><?php echo $hotel['vote']?></td>
-                    <td><?php echo $hotel['distance_to_center']?></td>
-           </tr>
-            <?php }; ?>
-
-            <?php if(!empty($park || $vote)) {
-            $research = true;
-                }else{
-                $research = false;}
-             ?>
-
-            <?php if ($research === true) { 
-                if ($hotel['vote'] >= $vote && $hotel['parking'] == $ParkSloat ){   ?>
-                <tr>
+<div class="container-xl d-flex justify-content-center bg-black color-white">
+    <table class="table">
+    <thead class="text-warning">
+        <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Parking</th>
+        <th scope="col">Vote</th>
+        <th scope="col">Distance to center</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php  foreach ( $hotels as $key => $hotel ) { ?>  
+            <?php if($research == false ){   ?>
+                <tr class="text-info">
                     <th scope="row"><?php echo $hotel['name']?></th>
                         <td><?php echo $hotel['description']?></td>
                         <td><?php echo $hotel['parking']?></td>
                         <td><?php echo $hotel['vote']?></td>
                         <td><?php echo $hotel['distance_to_center']?></td>
-                </tr>
-            <?php }; }; ?>    
-    <?php  }; ?>
-  </tbody>
-</table>
+                 </tr>
+                <?php }; ?>
+
+                <?php if(!empty($park || $vote)) {
+                $research = true;
+                    }else{
+                    $research = false;}
+                ?>
+
+                <?php if ($research === true) { 
+                    if ($hotel['vote'] >= $vote && $hotel['parking'] == $ParkSloat ){   ?>
+                    <tr class="text-info">
+                        <th scope="row"><?php echo $hotel['name']?></th>
+                            <td><?php echo $hotel['description']?></td>
+                            <td><?php echo $hotel['parking']?></td>
+                            <td><?php echo $hotel['vote']?></td>
+                            <td><?php echo $hotel['distance_to_center']?></td>
+                    </tr>
+                <?php }; }; ?>    
+        <?php  }; ?>
+    </tbody>
+    </table>
+</div>
 </body>
 </html>
 
