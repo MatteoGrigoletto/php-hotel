@@ -43,7 +43,7 @@
     $park = empty($_GET['parking']) ? null : $_GET['parking'];
     $vote = empty($_GET['vote']) ? null : $_GET['vote'];
     $research = false;
-    $ParkSloat = ($park == 'si') ? 'true' : 'false';
+    $ParkSloat = ($park == 'si') ? '1' : '0';
 
 
 
